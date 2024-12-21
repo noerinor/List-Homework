@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Collections"
+    "\\Generics",
+    "\\Generics\\CollectionLibrary",
+    "\\Generics\\Generics"
   ],
-  "SelectedNode": "\\Collections\\Collections.sln",
+  "SelectedNode": "\\Generics\\Generics.sln",
   "PreviewInSolutionExplorer": false
 }
