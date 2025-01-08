@@ -1,4 +1,5 @@
 using CustomCollections.Interfaces;
+using System.Collections;
 
 namespace CustomCollections.Interfaces
 {
@@ -15,7 +16,7 @@ namespace CustomCollections.Interfaces
 
         public int Count => _count;
 
-        public T this[int index]
+        public virtual T this[int index]
         {
             get
             {
@@ -31,34 +32,34 @@ namespace CustomCollections.Interfaces
             }
         }
 
-        public void Add(T item)
+        public virtual void Add(T item)
         {
             if (_count == _items.Length)
                 Resize();
             _items[_count++] = item;
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             _items = new T[4];
             _count = 0;
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(T item)
         {
             for (int i = 0; i < _count; i++)
                 if (_items[i].Equals(item)) return true;
             return false;
         }
 
-        public int IndexOf(T item)
+        public virtual int IndexOf(T item)
         {
             for (int i = 0; i < _count; i++)
                 if (_items[i].Equals(item)) return i;
             return -1;
         }
 
-        public void Insert(int index, T item)
+        public virtual void Insert(int index, T item)
         {
             if (index < 0 || index > _count)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -73,7 +74,7 @@ namespace CustomCollections.Interfaces
             _count++;
         }
 
-        public void RemoveAt(int index)
+        public virtual void RemoveAt(int index)
         {
             if (index < 0 || index >= _count)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -84,14 +85,14 @@ namespace CustomCollections.Interfaces
             _items[--_count] = default(T);
         }
 
-        public void Remove(T item)
+        public virtual void Remove(T item)
         {
             int index = IndexOf(item);
             if (index != -1)
                 RemoveAt(index);
         }
 
-        public void Reverse()
+        public virtual void Reverse()
         {
             for (int i = 0; i < _count / 2; i++)
             {
@@ -101,7 +102,7 @@ namespace CustomCollections.Interfaces
             }
         }
 
-        public T[] ToArray()
+        public virtual T[] ToArray()
         {
             T[] result = new T[_count];
             for (int i = 0; i < _count; i++)
@@ -116,6 +117,15 @@ namespace CustomCollections.Interfaces
                 newArray[i] = _items[i];
             _items = newArray;
         }
+
+        public virtual IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                yield return _items[i];
+            }
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
 

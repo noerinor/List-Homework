@@ -15,7 +15,7 @@ namespace ConsoleApp
             list.Add(1);
             list.Add(2);
             list.Insert(1, 3);
-            list.Remove(2);
+            list.Remove(3);
 
             Console.WriteLine("list:");
             foreach (var item in list.ToArray())
